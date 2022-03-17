@@ -1,0 +1,65 @@
+name: build-native-executables
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  buildOnLinux:
+    runs-on: [self-hosted, cere-network-xlarge-workers]
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@master
+      - uses: ayltai/setup-graalvm@v1
+        with:
+          java-version: 11
+          graalvm-version: 21.2.0
+          native-image: true
+      - name: Cache build .gradle dir
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle
+            .gradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libz-dev zlib1g-dev upx
+      - name: Gradle Build
+        run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.compression.level=10 -Dquarkus.native.compression.additional-args=--ultra-brute
+      - name: Upload artifacts
+        run: mkdir linux-amd64 && cp build/freeport-minting-tool-*-runner linux-amd64/freeport-minting-tool
+      - uses: actions/upload-artifact@v2
+        with:
+          name: freeport-minting-tool-linux-amd64
+          path: linux-amd64
+  buildOnMac:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@master
+      - uses: ayltai/setup-graalvm@v1
+        with:
+          java-version: 11
+          graalvm-version: 21.2.0
+          native-image: true
+      - name: Cache build .gradle dir
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle
+            .gradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
+      - name: Gradle Build
+        run: ./gradlew build
+      - name: Upload artifacts
+        run: mkdir mac-amd64 && cp build/freeport-minting-tool-*-runner mac-amd64/freeport-minting-tool
+      - name: Compress
+          uses: svenstaro/upx-action@v2
+          with:
+            file: mac-amd64/freeport-minting-tool
+            args: --best --ultra-brute
+      - uses: actions/upload-artifact@v2
+        with:
+          name: freeport-minting-tool-mac-amd64
+          path: mac-amd64
