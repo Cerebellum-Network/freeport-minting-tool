@@ -1,0 +1,1 @@
+# freeport-minting-tool
