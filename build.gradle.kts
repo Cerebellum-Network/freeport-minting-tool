@@ -56,7 +56,7 @@ dependencies {
 }
 
 group = "nft.freeport"
-version = "0.0.1-SNAPSHOT"
+version = "0.1.0"
 
 allOpen {
     annotation("javax.ws.rs.Path")
