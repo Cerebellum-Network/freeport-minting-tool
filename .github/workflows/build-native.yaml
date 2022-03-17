@@ -51,7 +51,7 @@ jobs:
             .gradle
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
       - name: Gradle Build
-        run: ./gradlew build
+        run: ./gradlew build -Dquarkus.package.type=native
       - name: Upload artifacts
         run: mkdir mac-amd64 && cp build/freeport-minting-tool-*-runner mac-amd64/freeport-minting-tool
       - name: Compress
