@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Freeport Minting Tool</title>
+</head>
+<body>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 ьк border-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 37 40" width="40">
+            <path fill="url(#a)"
+                  d="M19.17 39.57c-9.2 0-16.35-4.37-18.65-11.4L0 26.6l1.51-.72c.16-.08 4.13-2.05 3.88-5.92a7.86 7.86 0 0 0-3.76-6.09l-1.47-.82.63-1.55C3.81 4.3 10.7 0 19.17 0c6.67 0 12.52 2.58 16.04 7.07l.89 1.13-7.01 9.33-1.57-1.5c-.03-.02-3.37-3.13-7.24-3.15-3.72-.02-5.2 1.37-5.26 1.43l-2.76-2.62c.25-.27 2.62-2.63 8.04-2.59 3.45.02 6.44 1.64 8.2 2.88l2.75-3.66c-2.85-2.9-7.17-4.54-12.08-4.54-6.33 0-11.53 2.9-14.2 7.82a11.44 11.44 0 0 1 4.24 8.12c.29 4.48-2.61 7.3-4.5 8.64 2.23 4.62 7.62 7.43 14.46 7.43 4.74 0 9.59-1.82 12.58-4.63l-3.12-3.87a15.88 15.88 0 0 1-8.24 2.86c-5.28.27-8.4-2.13-8.54-2.23l2.38-2.96c.07.05 2.2 1.61 5.96 1.42a12.06 12.06 0 0 0 7.35-3.09l1.51-1.52 1.36 1.66 6.32 7.83-.97 1.18c-3.56 4.33-10.07 7.13-16.59 7.13Z"></path>
+            <defs>
+                <linearGradient id="a" x1="35.14" x2="4.41" y1="6.24" y2="33.46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.07" stop-color="#F46881"></stop>
+                    <stop offset="0.08" stop-color="#F36682"></stop>
+                    <stop offset="0.26" stop-color="#E74596"></stop>
+                    <stop offset="0.41" stop-color="#E031A2"></stop>
+                    <stop offset="0.51" stop-color="#DD2AA6"></stop>
+                    <stop offset="0.89" stop-color="#5210E2"></stop>
+                </linearGradient>
+            </defs>
+        </svg>
+        <span class="fs-4 ms-2">Freeport Minting Tool</span>
+    </header>
+
+    <main>
+        <h2>Preparation</h2>
+        <div class="row">
+            <div class="col">
+                <p>Prepare folder with the following structure: </p>
+                <code>
+                <pre>
+|-- assets
+    |-- asset1.jpg
+    |-- asset2.mp4
+    |-- ...
+|-- previews
+    |-- preview1.jpg
+    |-- preview2.jpg
+    |-- ...
+|-- nfts.csv
+|-- key.txt
+                </pre>
+                </code>
+                <p>Put assets to upload inside <code>assets</code> folder.</p>
+                <p>Put assets' previews inside <code>previews</code> folder.</p>
+                <p>Put your private key inside <code>key.txt</code>. <a
+                        href="https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key"
+                        target="_blank">How do I get it?</a></p>
+                <p>Set up NFTs in <code>nfts.csv</code> using the following template:</p>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Supply</th>
+                        <th>Asset file name</th>
+                        <th>Preview file name</th>
+                        <th>Price (USD)</th>
+                        <th>Joint account</th>
+                        <th>Primary cut</th>
+                        <th>Secondary cut</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>Name 1</code></td>
+                        <td><code>Desc 1</code></td>
+                        <td><code>300</code></td>
+                        <td><code>asset1.jpg</code></td>
+                        <td><code>preview1.jpg</code></td>
+                        <td><code>40</code></td>
+                        <td><code>0xbf420a26dfd9c5bbf8c04935bb9a7f12a5e3d84a</code></td>
+                        <td><code>10000</code></td>
+                        <td><code>100</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>Name 2</code></td>
+                        <td><code>Desc 2</code></td>
+                        <td><code>300</code></td>
+                        <td><code>asset2.mp4</code></td>
+                        <td><code>preview2.jpg</code></td>
+                        <td><code>40</code></td>
+                        <td><code>0xbf420a26dfd9c5bbf8c04935bb9a7f12a5e3d84a</code></td>
+                        <td><code>10000</code></td>
+                        <td><code>100</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                        <td><code>...</code></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>You can use Google Sheets to create a table and export it to CSV.</p>
+                <p><strong>Important note:</strong> first row of the table considered as "title" row and ignored during
+                    the parsing.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div class="mb-3">
+                        <p>Select environment</p>
+                        <input type="radio" class="btn-check" name="env" id="success-outlined" autocomplete="off"
+                               value="DEV"
+                               checked>
+                        <label class="btn btn-outline-success" for="success-outlined">DEV</label>
+                        <input type="radio" class="btn-check" name="env" id="warning-outlined" autocomplete="off"
+                               value="STG">
+                        <label class="btn btn-outline-warning" for="warning-outlined">STAGE</label>
+                        <input type="radio" class="btn-check" name="env" id="danger-outlined" autocomplete="off"
+                               value="PROD">
+                        <label class="btn btn-outline-danger" for="danger-outlined">PROD</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="path" class="form-label">Path to folder</label>
+                        <input type="text" class="form-control" id="path">
+                    </div>
+                </form>
+                <button type="button" class="btn btn-primary btn-lg" id="open" disabled>Preview</button>
+            </div>
+        </div>
+        <div id="preview" class="d-none">
+            <hr class="col-3 col-md-2 mb-5">
+            <h2>Preview</h2>
+            <div id="preview-table"></div>
+            <div class="mb-2"><strong>Private key:</strong> <span id="preview-key"></span></div>
+            <div class="mb-2"><strong>ENV:</strong> <span id="preview-env"></span></div>
+            <p>
+                <button type="button" class="btn btn-primary btn-lg" id="mint">OK, let's mint</button>
+                <button type="button" class="btn btn-outline-primary btn-lg" id="cancel">Cancel</button>
+            </p>
+        </div>
+        <div id="progress" class="d-none">
+            <hr class="col-3 col-md-2 mb-5">
+            <h2>Progress</h2>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Minted</th>
+                    <th>Price set</th>
+                    <th>Royalties set</th>
+                    <th>Asset uploaded</th>
+                </tr>
+                </thead>
+                <tbody id="progress-table">
+                </tbody>
+            </table>
+            <p class="d-none" id="report">
+                <a class="btn btn-primary btn-lg" href="/mint/report.csv" role="button">Download report</a>
+            </p>
+        </div>
+    </main>
+    <footer class="pt-5 my-5 text-muted border-top">
+        Created by the Cere Network team &middot; &copy;
+        <script>document.write(new Date().getFullYear())</script>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="/script.js"></script>
+</body>
+</html>
