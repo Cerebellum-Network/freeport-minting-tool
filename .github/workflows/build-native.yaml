@@ -55,10 +55,10 @@ jobs:
       - name: Upload artifacts
         run: mkdir mac-amd64 && cp build/freeport-minting-tool-*-runner mac-amd64/freeport-minting-tool
       - name: Compress
-          uses: svenstaro/upx-action@v2
-          with:
-            file: mac-amd64/freeport-minting-tool
-            args: --best --ultra-brute
+        uses: svenstaro/upx-action@v2
+        with:
+          file: mac-amd64/freeport-minting-tool
+          args: --best --ultra-brute
       - uses: actions/upload-artifact@v2
         with:
           name: freeport-minting-tool-mac-amd64
