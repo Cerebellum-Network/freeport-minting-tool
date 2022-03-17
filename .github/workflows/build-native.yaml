@@ -2,7 +2,7 @@ name: build-native-executables
 on:
   push:
     branches:
-      - dev
+      - master
 jobs:
   buildOnLinux:
     runs-on: [self-hosted, cere-network-xlarge-workers]
